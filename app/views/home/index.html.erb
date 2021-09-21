@@ -1,0 +1,261 @@
+<div class="container ">
+  <div class="card my-5">
+      <div class="card-header" >
+          <div class="row mt-2">
+              <div class="col-md-9 col-12">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Store</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Products</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Categories</a>
+                      </li>
+                    </ul>
+              </div>
+          </div>
+      </div>
+      <div class="card-body" >
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="col-12 mt-2 mb-4">
+                  <%=link_to 'New Store', new_store_path,class:"btn btn-success"%>
+                </div>
+                <hr/>
+              <% @stores.each do |store| %>
+                  <div class="card my-2">
+                    <div class="card-body">
+                      <h5  class="card-title" >
+                          <span id='name_<%=store.id%>' class="name_store" data-toggle="tooltip" data-placement="top" title="Click to edit name" style="cursor:pointer">
+                            <%=store.name%>
+                          </span>
+                      </h5>
+                      <p class="card-text" >
+                          <strong>Street:</strong>
+                          <span id='street_<%=store.id%>' class="street_store" data-toggle="tooltip" data-placement="top" title="Click to edit street" style="cursor:pointer"> 
+                            <%=store.street%>
+                          </span>
+                      </p>
+                      <p class="card-text"><strong>City:</strong><span>  <%=store.city%></span></p>
+                      <p class="card-text"><strong>Country:</strong><span>  <%=store.country%></span></p>
+                      <p class="card-text"><strong>Products:</strong>
+                          <%Store.find(store.id).products.each do |product|%> 
+                                  <span class="badge" style="background-color: #11cee1 !important;"><%=product.name%></span>
+                          <%end%></p>
+                      <%= link_to 'Update', edit_store_path(store),class:"btn btn-primary"%>
+                      <%= link_to "Delete", store, method: :delete, class:"btn btn-danger"%>
+                    </div>
+                  </div>
+              <%end%>
+          </div>
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="container"> 
+                    <div class="row mt-2 mb-4">
+                          <div class="col-12 mt-2 mb-4">
+                              <%=link_to 'New Product', new_product_path,class:"btn btn-success"%>
+                        </div>
+                          <hr/>
+                          <!--<div class="col-md-3 col-12  my-2">
+                              <label for="exampleInputEmail1" class="form-label">Search</label>
+                              <input type="text" aria-label="Last name" class="form-control">
+                          </div>
+                          <div class="col-md-1 col-12  mt-4">
+                                <a class="btn btn-primary mt-3">Search</a>
+                          </div>-->
+                          <%=form_tag(search_path, :method=>"get", :class => "nifty_form") do%>
+                                <div class="row">
+                                    <div class="col-md-4 col-12 my-2">
+                                      <label for="exampleInputEmail1" class="form-label">Store</label>
+                                      <select class="form-select" id="store_select">
+                                        <option value="all_stores">All</option>
+                                        <% @stores.each do |store|%>
+                                              <option value="store_<%=store.id%>"><%=store.name%></option>
+                                        <%end%>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-4 col-12  my-2">
+                                      <label for="exampleInputEmail1" class="form-label">Category</label>
+                                      <select class="form-select" id="category_select" aria-label="Default select example">
+                                        <option value="all_categories">All</option>
+                                        <% @categories.each do |category|%>
+                                            <option value="category_<%=category.id%>"><%=category.name%></option>
+                                        <%end%>
+                                      </select>
+                                  </div>
+                                        <div class="col-md-4 col-12  my-2">
+                                          <label for="exampleInputEmail1" class="form-label">Name</label>
+                                          <!--<%= search_field_tag :search,params[:search],placeholder:"type", class:"form-control" %>-->
+                                          <input typye="text" id="name_input" placeholder="type" class="form-control">
+                                      </div>
+                                </div>
+                          <%end%>
+                    </div>
+                    <div class="row " style="margin:auto" id="div_products">
+                        
+                        <% @products.each do |product|%>
+                          <div class="card my-2">
+                            <div class="card-body">
+                              <h5 class="card-title"><%=product.name%></h5>
+                              <p class="card-text"><strong>Color:</strong><span>  <%=product.color%></span></p>
+                              <p class="card-text"><strong>Size:</strong><span>  <%=product.size%></span></p>
+                              <p class="card-text"><strong>Price:</strong><span>  <%=product.price%></span></p>
+                              <p class="card-text"><strong>Category:</strong><span>  <%=Category.find(product.category_id).name%></span></p>
+                              <p class="card-text"><strong>Stores:</strong>
+                                <%Product.find(product.id).stores.each do |store|%> 
+                                        <span class="badge" style="background-color: #11cee1 !important;"><%=store.name%></span>
+                                <%end%></p>
+                              <%= link_to 'Update', edit_product_path(product),class:"btn btn-primary"%>
+                              <%= link_to "Delete", product, method: :delete, class:"btn btn-danger"%>
+                            </div>
+                          </div>
+                        <%end%>
+                    </div>
+                </div>
+          </div>
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="col-12 mt-2 mb-4">
+                  <!--<a  class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
+                    New Category
+                  </a>-->
+                  <%=link_to 'New Category', new_category_path, :remote=>true,class:"btn btn-success"%>
+                </div>
+                <hr/>
+                <% @categories.each do |category|%>
+                    <div class="card my-2">
+                      <div class="card-body">
+                        <h5 class="card-title"><%=category.name%></h5>
+                        <p class="card-text"><strong>Keywords:</strong><span>  
+                            <% Category.find(category.id).keywords.each do |keyword|%>
+                                  <span class="badge" style="background-color: #11cee1 !important;"><%=keyword.text%></span>
+                            <%end%>
+                        </span></p>
+                        <%= link_to 'Update', edit_category_path(category),:remote=>true, class:"btn btn-primary"%>
+                        <%= link_to "Delete", category, method: :delete, class:"btn btn-danger"%>
+                      </div>
+                    </div>
+                <%end%>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+<!--categories modal-->
+<div id="create_category" style="display:none">
+</div>
+
+<!--update categpries-->
+<div id="update_category" style="display:none">
+</div>
+
+<!--keywords modal-->
+<div id="create_keyword" style="display:none">
+</div>
+
+<!--update keywords-->
+<div id="update_keyword" style="display:none">
+</div>
+
+
+
+<script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    document.querySelector('#store_select').addEventListener("change", function() {
+              console.log(this.value);
+              search(this.value);
+        });
+
+    document.querySelector('#category_select').addEventListener("change", function() {
+              console.log(this.value);
+              search(this.value);
+        });
+
+
+    var formInput = document.querySelectorAll('#name_input');
+
+    $(".nifty_form").submit(function(e) {
+          e.preventDefault();
+          console.log(formInput[0].value)
+          search(formInput[0].value);
+      });
+
+    function search(value){
+          $.ajax({
+                    type: 'get',
+                    url: '/search',
+                    data: { search: value },
+                    success: function(data) {
+                        $("#div_products").html("");
+                        $("#div_products").append(data);
+                    }
+              });
+    }
+    
+
+    $( ".name_store" ).click(function() {
+        editableFields(this)
+    });
+
+    $( ".street_store" ).click(function() {
+        editableFields(this,"street")
+    });
+    
+    
+
+    function editableFields(event){
+        let id = $(event).attr('id');
+        let text = $(event).text();
+        //document.getElementById(id).style.display = "none";
+        if(!document.getElementById(`input_${id}`)){
+          $(`
+              <div class="row">
+                  <div class="col-2">
+                    <input type="text" id="input_${id}" class="form-control" value="${text.trim()}" style="width:100%">
+                  </div>
+                  <div class="col-3">
+                    <button id="button_${id}" class="btn btn-success">save</button>
+                  </div>
+              </div>
+          `).insertAfter(`#${id}`);
+          document.getElementById(id).style.display = "none";
+          document.getElementById(`button_${id}`).addEventListener("click", function(){ 
+                  update(id);
+          });
+        }
+        console.log(document.getElementById(`input_${id}`));
+    }
+
+    function update(id){
+        token_id = id.split("_")[1];
+        token_field = id.split("_")[0];
+        text = $(`#input_${id}`).val();
+        console.log(id);
+          $.ajax({
+          type: 'patch',
+          url:  `stores/${token_id}`,
+          contentType: 'application/json',
+          data: JSON.stringify(
+            {store:{ 
+            "id": `${token_id}`,
+            [`${token_field}`]:`${text}`}
+            ,_method:'put'}),
+          dataType: "script",
+          success: function(data) {
+              console.log(data);
+          }
+        });
+    }
+    
+
+</script>
+
+

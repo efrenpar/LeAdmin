@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center mt-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <%= form_with(model: store) do |form| %>
+                  <% if store.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(store.errors.count, "error") %> prohibited this store from being saved:</h2>
+
+                      <ul>
+                        <% store.errors.each do |error| %>
+                          <li><%= error.full_message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+                  <div >
+                    <%= form.label :name, class:"form-label" %>
+                    <%= form.text_field :name, class:"form-control" %>
+                  </div>
+
+                  <div >
+                    <%= form.label :street, class:"form-label" %>
+                    <%= form.text_field :street, class:"form-control" %>
+                  </div>
+
+                  <div >
+                    <%= form.label :number, class:"form-label" %>
+                    <%= form.text_field :number, class:"form-control" %>
+                  </div>
+
+                  <div >
+                    <%= form.label :zip_code, class:"form-label" %>
+                    <%= form.text_field :zip_code, class:"form-control" %>
+                  </div>
+
+                  <div >
+                    <%= form.label :city, class:"form-label" %>
+                    <%= form.text_field :city, class:"form-control" %>
+                  </div>
+
+                  <div >
+                    <%= form.label :country, class:"form-label" %>
+                    <%= form.text_field :country, class:"form-control" %>
+                  </div>
+
+                  <!--<div >
+                    <%= form.label :product_elements, class:"form-label" %>
+                    <%= form.text_field :product_elements, class:"form-control" %>
+                  </div>-->
+
+                  <div >
+                    <!--<%= form.collection_select :product_elements, Product.all, :id, :name, {}, {class:"form-select"} %>-->
+                    <div class="row my-2">
+                        <%= form.label :product_elements, class:"form-label" %>
+                        <%@products.each do |product|%>
+                            <label class="col-12 col-md-6">
+                                <%= form.check_box :product_elements,{multiple:true}, product.id, nil %>
+                                <%= product.name%>
+                            </label>
+                        <%end%>
+                    </div>
+                  </div>
+
+                  <div >
+                    <%= form.submit class:"btn btn-primary mt-4"%>
+                  </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+@import '~bootstrap/scss/bootstrap';
+
+body{
+    background-image: url("../../assets/images/h1_hero.jpg");
+}
+
+
+.small-container{
+    width:100%;
+    max-width: 650px;
+}
+
+.large-container{
+    width:100%;
+    max-width: 950px;
+}
+
+.padding{
+    padding:0 auto;
+}
+
+
+
+
+.margin-top{
+    margin-top:1.5em;
+}
+
+.field{
+    @extend .margin-top;
+    label{
+        @extend .text-uppercase;
+        @extend .text-secondary;
+    }
+    &:first-of-type{
+        margin-top:0;
+    }
+    input{
+        @extend .form-control;
+        @extend .bg-light;
+    }
+    input[type='checbox']{
+        display:inline-block;
+        width:auto;
+        vertical-align: middle;
+        margin-right: 0.5em;
+    }
+}
+
+.modal-lg {
+    max-width: 80%;
+}
+
+.scroll{
+    margin: 4px, 4px;
+    padding: 4px;
+    /* background-color: green; */
+    /* width: 500px; */
+    height: 110px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+}

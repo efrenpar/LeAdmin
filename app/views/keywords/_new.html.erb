@@ -1,0 +1,49 @@
+
+
+<div class="modal fade " id="exampleModalkeywords" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Keyword</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-8 col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                          
+                          <%= form_with(model: @keyword) do |form| %>
+                            <% if @keyword.errors.any? %>
+                                <div id="error_explanation">
+                                <h2><%= pluralize(@keyword.errors.count, "error") %> prohibited this keyword from being saved:</h2>
+
+                                <ul>
+                                    <% @keyword.errors.each do |error| %>
+                                    <li><%= error.full_message %></li>
+                                    <% end %>
+                                </ul>
+                                </div>
+                            <% end %>
+
+                                <%= form.label :text,class:"form-label" %>
+                                <%= form.text_field :text, class:"form-control" %>
+
+                            
+                                <%= form.label :category_id, class:"form-label" %>
+                                <%= form.collection_select :category_id, Category.all, :id, :name, {prompt: "Select a category"},{class: "form-control"}%>
+                            
+
+                            
+                                <%= form.submit class:"btn btn-primary mt-4"%>
+                            
+                            <% end %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

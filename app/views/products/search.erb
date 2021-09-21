@@ -1,0 +1,27 @@
+<h3>Search Results</h3>
+<!--
+<% @results.each do |result|%>
+    <%=result.name%> <br>
+<%end%>
+-->
+<%if @results.empty? || @results.nil? %>
+        <p>No data found</p>
+<%end%>
+
+<% @results.each do |result|%>
+                          <div class="card my-2">
+                            <div class="card-body">
+                              <h5 class="card-title"><%=result.name%></h5>
+                              <p class="card-text"><strong>Color:</strong><span>  <%=result.color%></span></p>
+                              <p class="card-text"><strong>Size:</strong><span>  <%=result.size%></span></p>
+                              <p class="card-text"><strong>Price:</strong><span>  <%=result.price%></span></p>
+                              <p class="card-text"><strong>Category:</strong><span>  <%=Category.find(result.category_id).name%></span></p>
+                              <p class="card-text"><strong>Stores:</strong>
+                                <%Product.find(result.id).stores.each do |store|%> 
+                                        <span class="badge" style="background-color: #11cee1 !important;"><%=store.name%></span>
+                                <%end%></p>
+                              <%= link_to 'Update', edit_product_path(result),class:"btn btn-primary"%>
+                              <%= link_to "Delete", result, method: :delete, class:"btn btn-danger"%>
+                            </div>
+                          </div>
+                        <%end%>

@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center mt-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <%= form_with(model: product) do |form| %>
+                  <% if product.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+                      <ul>
+                        <% product.errors.each do |error| %>
+                          <li><%= error.full_message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+                  <div >
+                    <%= form.label :name, class:"form-label" %>
+                    <%= form.text_field :name, class:"form-control" %>
+                  </div>
+
+                  <div >
+                    <%= form.label :color, class:"form-label" %>
+                    <%= form.color_field :color, class:"form-control" %>
+                  </div>
+
+                  <div >
+                    <%= form.label :size, class:"form-label" %>
+                    <%= form.text_field :size, class:"form-control" %>
+                  </div>
+
+                  <!--<div >
+                    <%= form.label :store_ids, class:"form-label" %>
+                    <%= form.text_field :store_ids, class:"form-control" %>
+                  </div>-->
+
+                  <!--<div >
+                    <%= form.label :category_id, class:"form-label" %>
+                    <%= form.text_field :category_id, class:"form-control" %>
+                  </div>-->
+
+                  <div >
+                    <%= form.label :category_id, class:"form-label" %>
+                    <%= form.collection_select :category_id, Category.all, :id, :name, {prompt: "Select a category"},{class: "form-control"}%>
+                  </div>
+
+                  <div class="row my-2">
+                        <%= form.label :store_elements, class:"form-label" %>
+                        <% if @stores %>
+                          <%@stores.each do |store|%>
+                              <label class="col-12 col-md-6">
+                                  <%= form.check_box :store_elements,{multiple:true}, store.id, nil %>
+                                  <%= store.name%>
+                              </label>
+                          <%end%>
+                        <%end%>
+                    </div>
+
+                  <%= form.label :price, class:"form-label" %>
+                  <%= form.text_field :price, class:"form-control" %>
+                  <%= form.submit class:"btn btn-primary mt-4" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

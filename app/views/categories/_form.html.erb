@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-center mt-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <%=form_with(model:@category, local:true) do |form|%>
+                    <%=form.label :name, class:"form-label"%>
+                    <%=form.text_field :name, class:"form-control"%>
+                    <%=form.submit class:"btn btn-primary mt-4"%>
+                <%end%>
+            </div>
+        </div>
+    </div>
+</div>
