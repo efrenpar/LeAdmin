@@ -1,24 +1,42 @@
-# README
+# LeAdmin
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Ruby version
+ruby 2.7.3p183
+# System dependencies
+rails >= 6.1.4
 
-Things you may want to cover:
+postgreSQL >= 13
 
-* Ruby version
+nodejs >= 14.16.1
 
-* System dependencies
+yarn >= 1.22.10
+# Configuration
 
-* Configuration
+    git clone https://github.com/efrenpar/LeAdmin.git
+    cd LeAdmin
+    yarn install
+    bundle install
+      
+# Set database information database.yml
+          development:
+          adapter: postgresql
+          encoding: unicode
+          database: leadmin
+          pool: 5
+          username: your_user
+          password: your_password
+          timeout: 5000
+# Create database
+        rails db:create
+# migrate database
+        rails db:migrate
+# You have to populate database with:
+[data_lea_admin.sql](https://github.com/efrenpar/LeAdmin/blob/main/data_lea_admin.sql)
 
-* Database creation
+# run project with:
+    rails server
+# go to:
+[localhost:3000](https://localhost:3000/)
+            
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
