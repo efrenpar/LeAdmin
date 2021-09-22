@@ -35,7 +35,8 @@ yarn >= 1.22.10
 
 # run project with:
     rails server
-    go to [localhost:3000](https://localhost:3000/)
+# go to:
+[localhost:3000](https://localhost:3000/)
             
 
 
