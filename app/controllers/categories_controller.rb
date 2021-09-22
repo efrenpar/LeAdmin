@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 
-    before_action :find_category, except: [:new,:create,:index]
+    before_action :find_category, except: [:new,:create,:index,:search]
 
     def index
         @categories = Category.all
@@ -32,8 +32,19 @@ class CategoriesController < ApplicationController
         redirect_to root_path
     end
 
+    def search
+        @parameter = params[:search].downcase
+        if @parameter.blank?
+          @results = nil
+        else
+          puts @parameter
+          #@results = Category.all.where("lower(name) LIKE:search", search:"%#{@parameter}%")
+          @results = Category.joins(:keywords).where("lower(text) LIKE:search", search:"%#{@parameter}%").distinct()
+        end
+      end
+
     def create
-        @category = Category.create(name:params[:category][:name])
+        @category = Category.find_or_create_by(name:params[:category][:name])
         redirect_to root_path
     end
 

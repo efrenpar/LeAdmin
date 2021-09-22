@@ -24,17 +24,38 @@
             </div>
             <div class="col-lg-4 col-12">
               
-              <h5>Keywords</h5>
+              
               <div class="row mt-2 mb-3">
-                    <div class="col-xl-9 col-lg-7 col-6">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
-                        placeholder="New keyword">
+                    <div class="col-xl-5 col-lg-7 col-6">
+                        <h5>Keywords</h5>
                     </div>
                     <div class="col-xl-3 col-lg-5 col-6">
                         <%=link_to 'create', new_keyword_path,remote: true,class:"btn btn-success"%>
                     </div>
               </div>
-              
+              <div class="container scroll" >
+                  <div class="card">
+                    <% @keywords.each do |keyword| %>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="card-text"><%=keyword.text%></p>
+                                </div>
+                                <div class="col-6">
+                                      <div class="row">
+                                          <div class="col-6">
+                                              <%= link_to 'Update', edit_keyword_path(keyword),:remote=>true, style:"color: blue"%>
+                                          </div>
+                                          <div class="col-6">
+                                              <%= link_to "Delete", keyword, method: :delete, style:"color: red"%>
+                                          </div>
+                                      </div>
+                                </div>
+                            </div>
+                          </div>
+                    <%end%>
+                  </div>
+              </div>
             </div>
         </div>
       </div>

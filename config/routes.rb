@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   
   get "/bienvenida", to: "home#index"
   get "/search", to: "products#search"
+  get "/category_search", to: "categories#search"
 
   resources:categories
   resources :stores

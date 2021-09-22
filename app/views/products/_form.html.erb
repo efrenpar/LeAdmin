@@ -44,6 +44,10 @@
                     <%= form.label :category_id, class:"form-label" %>
                     <%= form.collection_select :category_id, Category.all, :id, :name, {prompt: "Select a category"},{class: "form-control"}%>
                   </div>
+                  <!--Product.all.where("lower(name) LIKE:search", search:"%#{@parameter}%")-->
+                  <div class="row"><em style="color:blue">suggestions:</em></div>
+                  <div class="row" id="sugerencias">
+                  </div>
 
                   <div class="row my-2">
                         <%= form.label :store_elements, class:"form-label" %>
@@ -65,3 +69,23 @@
         </div>
     </div>
 </div>
+
+<script >
+
+      document.querySelector('#product_name').addEventListener('input', function (evt) {
+          console.log(this.value);
+          getCategories(this.value)
+      });
+
+     function getCategories(text){
+        $.ajax({
+                    type: 'get',
+                    url: `/category_search?search=${text}`,
+                    success: function(data) {
+                        $("#sugerencias").html("");
+                        $("#sugerencias").append(data);
+                    }
+              });
+      }
+
+</script>

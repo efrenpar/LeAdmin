@@ -47,7 +47,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: leadmin
+  database: leadmin_test
   pool: 5
   username: postgres
   password: root
