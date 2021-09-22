@@ -7,6 +7,8 @@ Things you may want to cover:
 
 * Ruby version
 
+    ruby 2.7.3p183
+
 * System dependencies
 
 * Configuration
