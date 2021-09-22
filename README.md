@@ -32,6 +32,10 @@ yarn >= 1.22.10
         rails db:migrate
 # You have to populate database with:
 [data_lea_admin.sql](https://github.com/efrenpar/LeAdmin/blob/main/data_lea_admin.sql)
+
+# run project with:
+    rails server
+    go to [localhost:3000](https://localhost:3000/)
             
 
 
